@@ -16,7 +16,7 @@ export async function GET(request: Request) {
 export async function PUT(request: Request) {
  
   const { id, status } = await request.json();
-  
+
   const result = await pool.query('UPDATE orders SET status = ? WHERE id = ?', [status, id]);
 
   console.log(result);
@@ -32,3 +32,6 @@ export async function DELETE(request: Request) {
   
   return NextResponse.json({ result })
 }
+
+
+
