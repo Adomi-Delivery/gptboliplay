@@ -1,11 +1,13 @@
 'use client';
-import React from "react";
+import React, { useState } from "react";
+
 import axios from 'axios';
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input, message, InputNumber, Typography, Row, Col  } from "antd";
 
 export default function FormOrder() {
 
-
+  // _____________________________________________________________________________________________________________________________
+  // funciones al finalizar el formulario
   const onFinish = async (values: any) => {
   
     try {
@@ -13,6 +15,7 @@ export default function FormOrder() {
       if (response.status === 200) {
         console.log('Success:', values);
         message.success('¡Datos enviados correctamente!');
+        form.resetFields();
       } else {
         console.log('Failed:', response);
         message.error('Hubo un error al enviar los datos. Por favor, inténtalo de nuevo.');
@@ -24,10 +27,28 @@ export default function FormOrder() {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
+  // _____________________________________________________________________________________________________________________________
+  // cambio de estado para texto
+  const [form] = Form.useForm();
 
+  const [quantity, setQuantity] = useState<number | null>(null);
+
+  const handleQuantityChange = (value: number | null) => {
+    setQuantity(value);
+  };
+  const handleFormValuesChange = (changedValues: any) => {
+    const { quantity } = changedValues;
+    if (quantity !== undefined) {
+      form.setFieldsValue({
+        multipliedQuantity: quantity * 100,
+      });
+    }
+  };
+  // _____________________________________________________________________________________________________________________________
   return (
     <>
       <Form
+        form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
@@ -36,9 +57,10 @@ export default function FormOrder() {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        
       >
         <Form.Item
-          label="Name"
+          label="Nombre"
           name="name"
           rules={[{ required: true, message: "El campo no debe ir vacio" }]}
         >
@@ -70,16 +92,25 @@ export default function FormOrder() {
         </Form.Item>
 
         <Form.Item
-          label="Cantidad (x100)"
-          name="quantity"
-          rules={[{ required: true, message: "El campo no debe ir vacio" }]}
-        >
-          <Input/>
-        </Form.Item>
+        label="Cantidad"
+        name="quantity"
+        rules={[
+          { required: true, message: "El campo no debe ir vacío" },
+          { type: 'number' },
+        ]}
+        style={{ display: "inline-block" }} // Estilo para ponerlo en línea
+      >
+        <InputNumber onChange={handleQuantityChange} />
+      </Form.Item>
+
+      <Typography.Text style={{ display: "inline-block"}}>
+        = {quantity !== null ? quantity * 100 : ""}
+      </Typography.Text>
+
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button htmlType="submit">
-            Submit
+            Enviar pedido
           </Button>
         </Form.Item>
 
