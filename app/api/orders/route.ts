@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 // Get orders
 export async function GET(request: Request) {
 
-    const result = await pool.query('SELECT * FROM orders')
+    const [result] = await pool.query('SELECT * FROM orders')
     
     return NextResponse.json({ result  })
 
