@@ -14,11 +14,21 @@ export async function GET(request: Request) {
 
 // edit status by id
 export async function PUT(request: Request) {
-  const res = await request.json();
-  const { id, status } = res;
-
+ 
+  const { id, status } = await request.json();
+  
   const result = await pool.query('UPDATE orders SET status = ? WHERE id = ?', [status, id]);
 
   console.log(result);
+  return NextResponse.json({ result })
+}
+
+
+// delete order by id
+export async function DELETE(request: Request) {
+  const { id } = await request.json();
+  
+  const result = await pool.query ('DELETE FROM orders WHERE id = ?',[id])
+  
   return NextResponse.json({ result })
 }
