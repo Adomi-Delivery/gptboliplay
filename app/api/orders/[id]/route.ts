@@ -2,7 +2,7 @@ import { pool } from "@/config/db";
 import { NextResponse } from 'next/server'
 
 
-
+// Get order by id
 export async function GET(request: Request) {
  const res = await request.json();
  const { id } = res;
@@ -12,6 +12,7 @@ export async function GET(request: Request) {
 }
 
 
+// edit status by id
 export async function PUT(request: Request) {
   const res = await request.json();
   const { id, status } = res;
