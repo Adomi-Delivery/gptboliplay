@@ -31,10 +31,11 @@ export default function FormOrder() {
   interface DataType {
     id: string | number;
     name: string;
-    CC: number;
+    cc: number;
     address: string;
     quantity: number;
     status: number;
+    city: string;
   }
 
   // ___________________________________________________________________________________________________________________
@@ -98,17 +99,20 @@ export default function FormOrder() {
     {
       title: 'CC',
       dataIndex: 'cc',
-      sorter: (a, b) => a.CC - b.CC,
+      sorter: (a, b) => a.cc - b.cc,
     },
     {
       title: 'address',
       dataIndex: 'address',
-      sorter: (a, b) => a.CC - b.CC,
     },
     {
       title: 'Cantidad',
       dataIndex: 'quantity',
       sorter: (a, b) => a.quantity - b.quantity,
+    },
+    {
+      title: 'Ciudad',
+      dataIndex: 'city',
     },
     {
       title: 'Estado',
@@ -118,7 +122,6 @@ export default function FormOrder() {
     },
     {
       title: 'Actions',
-      dataIndex: 'actions',
       render: (_, record) => (
         <>
           {record.status !== 3 ? (
@@ -129,14 +132,21 @@ export default function FormOrder() {
             <span className="mr-2 bg-green-800  text-white font-bold py-2 px-4 rounded">Finalizado</span>
           )}{' '} {/* Espacio entre los botones */}
           <Button onClick={() => DeleteButton(record)} className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</Button>
-          {/* <PDFDownloadLink
+          
+          
+          <PDFDownloadLink
             document={<OrderPDFGenerator orderData={record} />} 
-            fileName="somename.pdf"
+            fileName={`order_${record.id}.pdf`}
+            className="mr-2 bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded"
           >
             {({ blob, url, loading, error }) =>
-              loading ? 'Loading document...' : 'Download now!'
+              {
+                return (
+                  loading ? 'Loading document...' : 'PDF'
+                )
+              }
             }
-        </PDFDownloadLink> */}
+          </PDFDownloadLink>
 
 
         </>
