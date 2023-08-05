@@ -3,7 +3,7 @@ import { PDFViewer, Document, Page, Text } from '@react-pdf/renderer';
 interface DataType {
     id: string | number;
     name: string;
-    CC: number;
+    cc: number;
     address: string;
     quantity: number;
     status: number;
@@ -22,7 +22,7 @@ const OrderPDFGenerator: React.FC<OrderPDFGeneratorProps> = ({ orderData }) => {
           <Text>Nombre</Text>
           <Text>{orderData.name}</Text>
           <Text>Documento</Text>
-          <Text>{orderData.CC}</Text>
+          <Text>{orderData.cc}</Text>
           <Text>Dirección</Text>
           <Text>{orderData.address}</Text>
           <Text>Cantidad</Text>

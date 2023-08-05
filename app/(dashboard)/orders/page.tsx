@@ -31,10 +31,11 @@ export default function FormOrder() {
   interface DataType {
     id: string | number;
     name: string;
-    CC: number;
+    cc: number;
     address: string;
     quantity: number;
     status: number;
+    city: string;
   }
 
   // ___________________________________________________________________________________________________________________
@@ -98,17 +99,20 @@ export default function FormOrder() {
     {
       title: 'CC',
       dataIndex: 'cc',
-      sorter: (a, b) => a.CC - b.CC,
+      sorter: (a, b) => a.cc - b.cc,
     },
     {
       title: 'address',
       dataIndex: 'address',
-      sorter: (a, b) => a.CC - b.CC,
     },
     {
       title: 'Cantidad',
       dataIndex: 'quantity',
       sorter: (a, b) => a.quantity - b.quantity,
+    },
+    {
+      title: 'Ciudad',
+      dataIndex: 'city',
     },
     {
       title: 'Estado',
@@ -138,7 +142,7 @@ export default function FormOrder() {
             {({ blob, url, loading, error }) =>
               {
                 return (
-                  loading ? 'Loading document...' : 'Download now!'
+                  loading ? 'Loading document...' : 'PDF'
                 )
               }
             }
