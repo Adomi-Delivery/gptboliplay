@@ -15,7 +15,6 @@ interface OrderPDFGeneratorProps {
 
 const OrderPDFGenerator: React.FC<OrderPDFGeneratorProps> = ({ orderData }) => {
   return (
-    <PDFViewer>
       <Document>
         <Page>
           <Text>ID</Text>
@@ -32,7 +31,6 @@ const OrderPDFGenerator: React.FC<OrderPDFGeneratorProps> = ({ orderData }) => {
           <Text>{orderData.status}</Text>
         </Page>
       </Document>
-    </PDFViewer>
   );
 };
 
