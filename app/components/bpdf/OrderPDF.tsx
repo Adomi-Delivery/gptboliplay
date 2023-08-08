@@ -1,4 +1,4 @@
-import { PDFViewer, Document, Page, Text } from '@react-pdf/renderer';
+import { PDFViewer, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 interface DataType {
     id: string | number;
@@ -13,22 +13,61 @@ interface OrderPDFGeneratorProps {
   orderData: DataType;
 }
 
+// Estilos para la tabla
+const styles = StyleSheet.create({
+ page: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  labelColumn: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    textDecoration: 'underline',
+    marginBottom: 2,
+  },
+  dataColumn: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+
 const OrderPDFGenerator: React.FC<OrderPDFGeneratorProps> = ({ orderData }) => {
   return (
       <Document>
-        <Page>
-          <Text>ID</Text>
-          <Text>{orderData.id}</Text>
-          <Text>Nombre</Text>
-          <Text>{orderData.name}</Text>
-          <Text>Documento</Text>
-          <Text>{orderData.cc}</Text>
-          <Text>Dirección</Text>
-          <Text>{orderData.address}</Text>
-          <Text>Cantidad</Text>
-          <Text>{orderData.quantity}</Text>
-          <Text>Estado</Text>
-          <Text>{orderData.status}</Text>
+        <Page size="A7" style={styles.page}>
+          <View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Numero de Orden:</Text>
+              <Text style={styles.dataColumn}>{orderData.id}</Text>
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Nombre:</Text>
+              <Text style={styles.dataColumn}>{orderData.name}</Text>
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Documento:</Text>
+              <Text style={styles.dataColumn}>{orderData.cc}</Text>
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Dirección:</Text>
+              <Text style={styles.dataColumn}>{orderData.address}</Text>
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Cantidad:</Text>
+              <Text style={styles.dataColumn}>{orderData.quantity}</Text>
+            </View>
+          </View>
         </Page>
       </Document>
   );
