@@ -49,50 +49,67 @@ export default function FormOrder() {
     <>
       <Form
         form={form}
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
+        name="form"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
-        
-      >
+        className="custom-form"      >
+        <div className="pb-5">
+          <h2 className="text-2xl font-bold">1.Contactó</h2>
+          <p >Ingresé los datos para comunicarnos cuando los rótulos esten listos</p>
+        </div>  
         <Form.Item
-          label="Nombre"
+          name=""
+          rules={[{ required: true, message: "El campo no debe ir vacio" }]}
+        >
+          <Input placeholder="Nombre y Apellido"/>
+        </Form.Item>
+        
+        <Form.Item
+          name=""
+          rules={[{ required: true, message: "El campo no debe ir vacio" }]}
+        >
+          <Input placeholder="Celular"/>
+        </Form.Item>
+
+        <div className="pb-5">
+          <h2 className="text-2xl font-bold">2.Información a imprimir</h2>
+          <p>Se imprimirá como remitente en el rotulo</p>
+        </div>        
+        
+        <Form.Item
           name="name"
           rules={[{ required: true, message: "El campo no debe ir vacio" }]}
         >
-          <Input name="name"/>
+          <Input placeholder="Nombre y Apellido"/>
         </Form.Item>
 
         <Form.Item
-          label="CC"
           name="cc"
           rules={[{ required: true, message: "El campo no debe ir vacio" }]}
         >
-          <Input/>
+          <Input placeholder="Cédula"/>
         </Form.Item>
 
         <Form.Item
-          label="Dirección"
           name="address"
           rules={[{ required: true, message: "El campo no debe ir vacio" }]}
         >
-          <Input/>
+          <Input placeholder="Dirección"/>
         </Form.Item>
 
         <Form.Item
-          label="Ciudad"
           name="city"
           rules={[{ required: true, message: "El campo no debe ir vacio" }]}
         >
-          <Input/>
+          <Input placeholder="Ciudad"/>
         </Form.Item>
-
+        
+        <div className="pb-5">
+          <h2 className="text-2xl font-bold">3. Cantidad de rótulos</h2>
+          <p className="text-xs">Se imprimen x100 / 1=100 rotulos</p>
+        </div>   
         <Form.Item
-        label="Cantidad"
         name="quantity"
         rules={[
           { required: true, message: "El campo no debe ir vacío" },
@@ -109,12 +126,18 @@ export default function FormOrder() {
 
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button htmlType="submit">
+          <Button htmlType="submit" className=" font-bold bg-red-400 text-white border-r-4 border-b-4 border-l-1 border-t-1 border-neutral-950 hover:bg-red-500!important">
             Enviar pedido
           </Button>
         </Form.Item>
-
+        <div className="pt-3">
+          <p className="text-sm pb-2">Nota: Los errores por mala digitación serán asumidos por el cliente</p>
+          <p className="text-sm">Cualquier duda o comentario contáctenos al whatsapp 300 123 456</p>
+        </div>
       </Form>
+      
     </>
   );
 }
+
+
