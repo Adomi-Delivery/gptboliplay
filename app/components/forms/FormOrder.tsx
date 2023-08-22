@@ -36,14 +36,6 @@ export default function FormOrder() {
   const handleQuantityChange = (value: number | null) => {
     setQuantity(value);
   };
-  const handleFormValuesChange = (changedValues: any) => {
-    const { quantity } = changedValues;
-    if (quantity !== undefined) {
-      form.setFieldsValue({
-        multipliedQuantity: quantity * 100,
-      });
-    }
-  };
   // _____________________________________________________________________________________________________________________________
   return (
     <>
@@ -54,20 +46,25 @@ export default function FormOrder() {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
         className="custom-form"      >
+        
         <div className="pb-5">
           <h2 className="text-2xl font-bold">1.Contactó</h2>
           <p >Ingresé los datos para comunicarnos cuando los rótulos esten listos</p>
         </div>  
+
         <Form.Item
-          name=""
+          name="client"
           rules={[{ required: true, message: "El campo no debe ir vacio" }]}
         >
           <Input placeholder="Nombre y Apellido"/>
         </Form.Item>
         
         <Form.Item
-          name=""
-          rules={[{ required: true, message: "El campo no debe ir vacio" }]}
+          name="client_phone"
+          rules={[{ pattern: /^[0-9]+$/, message: "Ingrese solo números" },
+                  {  min: 10, message: "Debe tener al menos 10 caracteres" },
+                  {  required: true, message: "El campo no debe ir vacio" }
+                ]}
         >
           <Input placeholder="Celular"/>
         </Form.Item>
@@ -79,28 +76,42 @@ export default function FormOrder() {
         
         <Form.Item
           name="name"
-          rules={[{ required: true, message: "El campo no debe ir vacio" }]}
+          rules={[{}]}
         >
           <Input placeholder="Nombre y Apellido"/>
         </Form.Item>
 
         <Form.Item
           name="cc"
-          rules={[{ required: true, message: "El campo no debe ir vacio" }]}
+          rules={[{ pattern: /^[0-9]+$/, message: "Ingrese solo números" }]}
         >
-          <Input placeholder="Cédula"/>
+          <Input placeholder="Cédula o NIT"/>
         </Form.Item>
 
         <Form.Item
           name="address"
-          rules={[{ required: true, message: "El campo no debe ir vacio" }]}
+          rules={[{}]}
         >
           <Input placeholder="Dirección"/>
         </Form.Item>
 
         <Form.Item
+          name="instagram"
+          rules={[{}]}
+        >
+          <Input placeholder="Instagram"/>
+        </Form.Item>
+        
+        <Form.Item
+          name="facebook"
+          rules={[{}]}
+        >
+          <Input placeholder="Facebook"/>
+        </Form.Item>
+
+        <Form.Item
           name="city"
-          rules={[{ required: true, message: "El campo no debe ir vacio" }]}
+          rules={[{}]}
         >
           <Input placeholder="Ciudad"/>
         </Form.Item>
@@ -109,31 +120,35 @@ export default function FormOrder() {
           <h2 className="text-2xl font-bold">3. Cantidad de rótulos</h2>
           <p className="text-xs">Se imprimen x100 / 1=100 rotulos</p>
         </div>   
+        
         <Form.Item
-        name="quantity"
-        rules={[
-          { required: true, message: "El campo no debe ir vacío" },
-          { type: 'number' },
-        ]}
-        style={{ display: "inline-block" }} // Estilo para ponerlo en línea
-      >
-        <InputNumber onChange={handleQuantityChange} />
-      </Form.Item>
+          name="quantity"
+          rules={[
+            { required: true, message: "El campo no debe ir vacío" },
+            { pattern: /^[0-9]+$/, message: "Ingrese solo números" },
+          ]}
+          style={{ display: "inline-block" }} // Estilo para ponerlo en línea
+        >
+        <InputNumber onChange={handleQuantityChange}  />
+        </Form.Item>
 
-      <Typography.Text style={{ display: "inline-block"}}>
-        = {quantity !== null ? quantity * 100 : ""}
-      </Typography.Text>
+        <Typography.Text style={{ display: "inline-block"}}>
+          = {quantity !== null ? quantity * 100 : ""}
+        </Typography.Text>
 
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item className="flex justify-center">
           <Button htmlType="submit" className=" font-bold bg-red-400 text-white border-r-4 border-b-4 border-l-1 border-t-1 border-neutral-950 hover:bg-red-500!important">
             Enviar pedido
           </Button>
         </Form.Item>
+        
         <div className="pt-3">
           <p className="text-sm pb-2">Nota: Los errores por mala digitación serán asumidos por el cliente</p>
           <p className="text-sm">Cualquier duda o comentario contáctenos al whatsapp 300 123 456</p>
+        
         </div>
+      
       </Form>
       
     </>
