@@ -2,9 +2,9 @@ import FormOrder from './components/forms/FormOrder'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between pt-40 pb-80 bg-yellow-100">
+    <main className="flex  flex-col items-center justify-between bg-yellow-100">
  
-       <div className="w-[300px] h-[800px]">
+       <div className="w-[300px] max-w-full pt-3 pb-3">
 
         <img src="/images/logo.png" alt="Logo" width='auto' />
         <div className="pb-8">
