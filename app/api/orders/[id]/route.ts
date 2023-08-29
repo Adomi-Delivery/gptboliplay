@@ -4,10 +4,10 @@ import { NextResponse } from 'next/server'
 
 // Get order by id
 export async function GET(request: Request) {
- const res = await request.json();
- const { id } = res;
+ const { id } = await request.json();
 
  const [result] = await pool.query ('SELECT FROM orders WHERE id = ?',[id])
+
  return NextResponse.json({ result })
 }
 
