@@ -83,7 +83,7 @@ export default function FormOrder() {
 
         <Form.Item
           name="cc"
-          rules={[{ pattern: /^[0-9]+$/, message: "Ingrese solo números" }]}
+          rules={[{}]}
         >
           <Input placeholder="Cédula o NIT"/>
         </Form.Item>

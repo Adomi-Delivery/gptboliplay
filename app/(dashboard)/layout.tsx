@@ -19,8 +19,19 @@ export default function DashboardLayout({children}: {children: React.ReactNode})
 
     return (
       <Layout>
+        
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="demo-logo-vertical" />
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: '16px',
+                width: 64,
+                height: 64,
+              }}
+            />
           <Menu
             theme="dark"
             mode="inline"
@@ -44,19 +55,6 @@ export default function DashboardLayout({children}: {children: React.ReactNode})
             ]}
           />
         </Sider>
-        <Layout>
-          <Header style={{ padding: 0, background: colorBgContainer }}>
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: '16px',
-                width: 64,
-                height: 64,
-              }}
-            />
-          </Header>
           <Content
             style={{
               margin: '24px 16px',
@@ -67,7 +65,6 @@ export default function DashboardLayout({children}: {children: React.ReactNode})
           >
             {children}
           </Content>
-        </Layout>
       </Layout>
     );
   }
