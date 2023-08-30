@@ -5,6 +5,8 @@ import type { ColumnsType, TableProps } from 'antd/es/table';
 import axios from 'axios';
 import OrderPDFGenerator from '@/app/components/bpdf/OrderPDF';
 import { PDFDownloadLink} from '@react-pdf/renderer';
+import Link from 'next/link';
+
 
 export default function FormOrder() {
 
@@ -29,14 +31,19 @@ export default function FormOrder() {
 
   // Datos y su tipo
   interface DataType {
-    id: string | number;
+    id: number;
     name: string;
     cc: number;
     address: string;
     quantity: number;
     status: number;
+    createdAT: number;
     city: string;
-  }
+    facebook: string;
+    instagram: string;
+    client: string;
+    client_phone: string;
+}
 
   // ___________________________________________________________________________________________________________________
 
@@ -93,26 +100,20 @@ export default function FormOrder() {
   // Columns
   const columns: ColumnsType<DataType> = [
     {
-      title: 'Nombre',
-      dataIndex: 'name',
+      title: 'Número de Orden',
+      dataIndex: 'id',
+      sorter: (a, b) => a.id - b.id,
     },
     {
-      title: 'CC',
-      dataIndex: 'cc',
-      sorter: (a, b) => a.cc - b.cc,
-    },
-    {
-      title: 'address',
-      dataIndex: 'address',
+      title: 'Fecha de ingreso',
+      dataIndex: 'createdAT',
+      sorter: (a, b) => a.createdAT - b.createdAT,
     },
     {
       title: 'Cantidad',
       dataIndex: 'quantity',
       sorter: (a, b) => a.quantity - b.quantity,
-    },
-    {
-      title: 'Ciudad',
-      dataIndex: 'city',
+      render: (quantity) => <span>{quantity * 100}</span>,
     },
     {
       title: 'Estado',
@@ -121,7 +122,7 @@ export default function FormOrder() {
       render: (status) => statusMap[status] || 'Desconocido',
     },
     {
-      title: 'Actions',
+      title: 'Acciones',
       render: (_, record) => (
         <>
           {record.status !== 3 ? (
@@ -131,7 +132,7 @@ export default function FormOrder() {
           ) : (
             <span className="mr-2 bg-green-800  text-white font-bold py-2 px-4 rounded">Finalizado</span>
           )}{' '} {/* Espacio entre los botones */}
-          <Button onClick={() => DeleteButton(record)} className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</Button>
+          <Button onClick={() => DeleteButton(record)} className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Borrar</Button>
           
           
           <PDFDownloadLink
@@ -148,6 +149,9 @@ export default function FormOrder() {
             }
           </PDFDownloadLink>
 
+          <Link href={`/orders/${record.id}`} passHref>
+            <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Ver Detalles</button>
+          </Link>
 
         </>
       ),

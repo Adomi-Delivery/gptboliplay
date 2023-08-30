@@ -4,12 +4,18 @@ import { NextResponse } from 'next/server'
 
 // Get order by id
 export async function GET(request: Request) {
- const { id } = await request.json();
-
- const [result] = await pool.query ('SELECT FROM orders WHERE id = ?',[id])
-
- return NextResponse.json({ result })
+ try{
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split('/'); // Dividir el pathname en partes
+  const orderId = pathParts[pathParts.length - 1]; // Obtener el último elemento como el orderId
+  const [result] = await pool.query ('SELECT * FROM orders WHERE id = ?',[orderId])    
+  return NextResponse.json({ result  })
+  }catch (error) {
+    console.error('Error fetching data:', error);
+  }
 }
+
+
 
 
 // edit status by id

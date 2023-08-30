@@ -11,4 +11,19 @@
   }
 
 
+  #table_order {
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  #table_order table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 0 auto;
+  }
+  
+  #table_order th, #table_order td {
+    border: 1px solid black;
+    padding: 8px;
+  }
   

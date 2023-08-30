@@ -1,12 +1,18 @@
 import { PDFViewer, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 interface DataType {
-    id: string | number;
-    name: string;
-    cc: number;
-    address: string;
-    quantity: number;
-    status: number;
+  id: number;
+  name: string;
+  cc: number;
+  address: string;
+  quantity: number;
+  status: number;
+  createdAT: number;
+  city: string;
+  facebook: string;
+  instagram: string;
+  client: string;
+  client_phone: string;
 }
 
 interface OrderPDFGeneratorProps {
@@ -18,26 +24,29 @@ const styles = StyleSheet.create({
  page: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   container: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-
+    justifyContent: 'flex-start',
+    marginRight: 20, // Margen a la derecha
+    marginTop: 5, // Margen arriba
+    marginBottom: 5, // Margen abajo
   },
   labelColumn: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     fontWeight: 'bold',
     textDecoration: 'underline',
-    marginBottom: 2,
+    marginTop: 5,
   },
   dataColumn: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginTop: 5,
+    fontSize: '15px',
   },
 });
 
@@ -45,7 +54,7 @@ const styles = StyleSheet.create({
 const OrderPDFGenerator: React.FC<OrderPDFGeneratorProps> = ({ orderData }) => {
   return (
       <Document>
-        <Page size="A7" style={styles.page}>
+        <Page size="A5" style={styles.page}>
           <View>
             <View style={styles.container}>
               <Text style={styles.labelColumn}>Numero de Orden:</Text>
@@ -66,6 +75,26 @@ const OrderPDFGenerator: React.FC<OrderPDFGeneratorProps> = ({ orderData }) => {
             <View style={styles.container}>
               <Text style={styles.labelColumn}>Cantidad:</Text>
               <Text style={styles.dataColumn}>{orderData.quantity}</Text>
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Ciudad:</Text>
+              <Text style={styles.dataColumn}>{orderData.city}</Text>
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Facebook:</Text>
+              <Text style={styles.dataColumn}>{orderData.facebook}</Text>
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Instagram:</Text>
+              <Text style={styles.dataColumn}>{orderData.instagram}</Text>
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Cliente:</Text>
+              <Text style={styles.dataColumn}>{orderData.client}</Text>
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Nombre del cliente:</Text>
+              <Text style={styles.dataColumn}>{orderData.client_phone}</Text>
             </View>
           </View>
         </Page>
