@@ -13,10 +13,11 @@ interface DataType {
   instagram: string;
   client: string;
   client_phone: string;
+
 }
 
 interface OrderPDFGeneratorProps {
-  orderData: DataType;
+  orderData: DataType|null
 }
 
 // Estilos para la tabla
@@ -58,43 +59,36 @@ const OrderPDFGenerator: React.FC<OrderPDFGeneratorProps> = ({ orderData }) => {
           <View>
             <View style={styles.container}>
               <Text style={styles.labelColumn}>Numero de Orden:</Text>
-              <Text style={styles.dataColumn}>{orderData.id}</Text>
+              <Text style={styles.dataColumn}>{orderData?.id}</Text>
             </View>
             <View style={styles.container}>
               <Text style={styles.labelColumn}>Nombre:</Text>
-              <Text style={styles.dataColumn}>{orderData.name}</Text>
+              <Text style={styles.dataColumn}>{orderData?.name}</Text>
             </View>
             <View style={styles.container}>
               <Text style={styles.labelColumn}>Documento:</Text>
-              <Text style={styles.dataColumn}>{orderData.cc}</Text>
+              <Text style={styles.dataColumn}>{orderData?.cc}</Text>
             </View>
             <View style={styles.container}>
               <Text style={styles.labelColumn}>Dirección:</Text>
-              <Text style={styles.dataColumn}>{orderData.address}</Text>
+              <Text style={styles.dataColumn}>{orderData?.address}</Text>
             </View>
-            <View style={styles.container}>
-              <Text style={styles.labelColumn}>Cantidad:</Text>
-              <Text style={styles.dataColumn}>{orderData.quantity}</Text>
-            </View>
+
             <View style={styles.container}>
               <Text style={styles.labelColumn}>Ciudad:</Text>
-              <Text style={styles.dataColumn}>{orderData.city}</Text>
+              <Text style={styles.dataColumn}>{orderData?.city}</Text>
             </View>
             <View style={styles.container}>
               <Text style={styles.labelColumn}>Facebook:</Text>
-              <Text style={styles.dataColumn}>{orderData.facebook}</Text>
+              <Text style={styles.dataColumn}>{orderData?.facebook}</Text>
             </View>
             <View style={styles.container}>
               <Text style={styles.labelColumn}>Instagram:</Text>
-              <Text style={styles.dataColumn}>{orderData.instagram}</Text>
+              <Text style={styles.dataColumn}>{orderData?.instagram}</Text>
             </View>
             <View style={styles.container}>
-              <Text style={styles.labelColumn}>Cliente:</Text>
-              <Text style={styles.dataColumn}>{orderData.client}</Text>
-            </View>
-            <View style={styles.container}>
-              <Text style={styles.labelColumn}>Nombre del cliente:</Text>
-              <Text style={styles.dataColumn}>{orderData.client_phone}</Text>
+              <Text style={styles.labelColumn}>Cantidad:</Text>
+              <Text style={styles.dataColumn}>{orderData?.quantity}</Text>
             </View>
           </View>
         </Page>

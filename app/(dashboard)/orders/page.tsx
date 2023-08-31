@@ -6,6 +6,7 @@ import axios from 'axios';
 import OrderPDFGenerator from '@/app/components/bpdf/OrderPDF';
 import { PDFDownloadLink} from '@react-pdf/renderer';
 import Link from 'next/link';
+import dayjs from 'dayjs';
 
 
 
@@ -49,6 +50,7 @@ export default function FormOrder() {
     instagram: string;
     client: string;
     client_phone: string;
+    orderData: DataType | null;
 }
 
   // ___________________________________________________________________________________________________________________
@@ -114,7 +116,8 @@ export default function FormOrder() {
     {
       title: 'Fecha de ingreso',
       dataIndex: 'createdAT',
-      sorter: (a, b) => a.createdAT - b.createdAT,
+      sorter: (a, b) => dayjs(a.createdAT).unix() - dayjs(b.createdAT).unix(),
+      render: (createdAT) => dayjs(createdAT).format('YYYY-MM-DD'),
     },
     {
       title: 'Cantidad',

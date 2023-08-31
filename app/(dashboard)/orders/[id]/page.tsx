@@ -40,6 +40,11 @@ export default function GetData({ params }: { params: { id: string } }) {
     return (
       <div id="table_order">
         <table>
+        <thead>
+      <tr>
+      <th colSpan={2}>Número de orden: {order?.id}</th>
+      </tr>
+    </thead>
           <tbody>
             <tr>
               <th>Nombre a imprimir</th>

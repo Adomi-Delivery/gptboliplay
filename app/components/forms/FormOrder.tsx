@@ -7,6 +7,11 @@ import { Button, Form, Input, message, InputNumber, Typography, Row, Col  } from
 export default function FormOrder() {
 
   // _____________________________________________________________________________________________________________________________
+  
+  
+  
+  
+  
   // funciones al finalizar el formulario
   const onFinish = async (values: any) => {
   
@@ -34,8 +39,25 @@ export default function FormOrder() {
   const [quantity, setQuantity] = useState<number | null>(null);
 
   const handleQuantityChange = (value: number | null) => {
-    setQuantity(value);
+    setQuantity(value); 
+    
   };
+  const handleIncrement = () => {
+    if (quantity !== null) {
+      setQuantity(quantity + 1);
+    } else {
+      setQuantity(2); // Si quantity es null, incrementar desde 1 sería 2
+    }
+  };
+
+  const handleDecrement = () => {
+    if (quantity !== null && quantity > 1) {
+      setQuantity(quantity - 1);
+    } else {
+      setQuantity(1); // Si quantity es null o es 1, decrementar sería 1
+    }
+  };
+  
   // _____________________________________________________________________________________________________________________________
   return (
     <>
@@ -122,19 +144,21 @@ export default function FormOrder() {
         </div>   
         
         <Form.Item
-          name="quantity"
-          rules={[
-            { required: true, message: "El campo no debe ir vacío" },
-            { pattern: /^[0-9]+$/, message: "Ingrese solo números" },
-          ]}
-          style={{ display: "inline-block" }} // Estilo para ponerlo en línea
-        >
-        <InputNumber onChange={handleQuantityChange}  />
-        </Form.Item>
+      name="quantity"
+      rules={[
+        { required: true, message: "El campo no debe ir vacío" },
+        { pattern: /^[0-9]+$/, message: "Ingrese solo números" },
+      ]}
+      style={{ display: "inline-block" }}
+    >
+      <InputNumber value={quantity || 1} onChange={handleQuantityChange}/>
+    </Form.Item>
 
-        <Typography.Text style={{ display: "inline-block"}}>
-          = {quantity !== null ? quantity * 100 : ""}
-        </Typography.Text>
+    <Typography.Text style={{ display: "inline-block" }}>
+      = {quantity !== null ? quantity * 100 : ""}
+    </Typography.Text>
+    <Button onClick={handleDecrement}>-</Button>
+        <Button onClick={handleIncrement}>+</Button>
 
 
         <Form.Item className="flex justify-center">
