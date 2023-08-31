@@ -21,7 +21,7 @@ interface DataType {
 
 
 
-export default function getdata({ params }: { params: { id: string } }) {
+export default function GetData({ params }: { params: { id: string } }) {
   //___________________________________________________________________________________________________________________ 
     const [order,setOrder] = useState <DataType|null >(null)
     
