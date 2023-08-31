@@ -1,7 +1,6 @@
 'use client'
 import axios from "axios";
 import {useEffect, useState} from "react";
-import { useRouter, NextRouter } from 'next/router';
 import Link from 'next/link';
 
 
@@ -23,33 +22,19 @@ interface DataType {
 
 
 export default function getdata({ params }: { params: { id: string } }) {
- // ___________________________________________________________________________________________________________________
-
- const DeleteButton = async () => {
-    const router = useRouter();
-
-    try {
-      const response = await axios.delete(`/api/orders/${params.id}`, { data: params });
-      
-      router.push('/orders');
-      console.log('orden', params.id, response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   //___________________________________________________________________________________________________________________ 
     const [order,setOrder] = useState <DataType|null >(null)
     
     useEffect (()=>{
        
-        axios.get(`/api/orders/${params.id}`)
+      axios.get(`/api/orders/${params.id}`)
      .then(result => {
          const order = result.data.result[0]
          setOrder(order)
         })
      .catch(error => {
         throw error;    
-     });
+      });
     }, [params.id])
 
     return(
@@ -94,10 +79,7 @@ export default function getdata({ params }: { params: { id: string } }) {
       <td>{order?.client_phone}</td>
     </tr>
     <tr>
-        <button
-            onClick={DeleteButton}
-            className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded pt-2"
-        >
+        <button className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded pt-2">
             Delete
         </button>      
         <Link href={`/orders`} passHref>

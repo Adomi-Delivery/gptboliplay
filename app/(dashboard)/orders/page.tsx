@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { Table, Button  } from 'antd';
+import { Table, Button, Pagination  } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import axios from 'axios';
 import OrderPDFGenerator from '@/app/components/bpdf/OrderPDF';
@@ -8,10 +8,13 @@ import { PDFDownloadLink} from '@react-pdf/renderer';
 import Link from 'next/link';
 
 
+
 export default function FormOrder() {
 
   // ___________________________________________________________________________________________________________________________
   const [orders, setOrders] = useState<DataType[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1); // Estado para controlar la página actual
+  const itemsPerPage = 5;
 
   // Función para obtener los datos desde la API
   const fetchData = async () => {
@@ -24,10 +27,13 @@ export default function FormOrder() {
   };
 
   useEffect(() => {
-      fetchData();
-  }, []);
-
+    fetchData();
+  }, [currentPage]); 
   // ___________________________________________________________________________________________________________________
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   // Datos y su tipo
   interface DataType {
@@ -47,6 +53,7 @@ export default function FormOrder() {
 
   // ___________________________________________________________________________________________________________________
 
+  
   // status number to text
   interface StatusMap {
     [key: number]: string;
@@ -165,9 +172,17 @@ export default function FormOrder() {
 
   return (
     <>
-      {/* Mostrar la tabla de órdenes */}
-      <Table columns={columns} dataSource={orders} />
-    </>
+    <Table columns={columns} dataSource={orders.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)} onChange={onChange} pagination={false} />
+
+    <Pagination
+      current={currentPage}
+      onChange={handlePageChange}
+      total={orders.length}
+      pageSize={itemsPerPage} // Configura el tamaño de página
+      style={{ marginTop: '16px', textAlign: 'center' }}
+    />
+  </>
+
   );
 }
 
