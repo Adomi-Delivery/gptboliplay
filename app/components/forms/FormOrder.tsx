@@ -36,11 +36,10 @@ export default function FormOrder() {
   // cambio de estado para texto
   const [form] = Form.useForm();
 
-  const [quantity, setQuantity] = useState<number | null>(null);
+  const [quantity, setQuantity] = useState<number | null>(1);
 
   const handleQuantityChange = (value: number | null) => {
-    setQuantity(value); 
-    
+    setQuantity(value);
   };
   const handleIncrement = () => {
     if (quantity !== null) {
@@ -154,20 +153,25 @@ export default function FormOrder() {
         </div>   
         
         <Form.Item
-      name="quantity"
-      rules={[
-        { required: true, message: "El campo no debe ir vacío" },
-        { pattern: /^[0-9]+$/, message: "Ingrese solo números" },
-      ]}
-      style={{ display: "flex", alignItems: "center", justifyContent: "center", }}
-    >
-      <InputNumber value={quantity || 1} onChange={handleQuantityChange}/>
-      
-      <Button onClick={handleDecrement}>-</Button>
-        <Button onClick={handleIncrement}>+</Button>
-
-        </Form.Item>
-
+          name="quantity"
+          rules={[
+            { required: true, message: 'El campo no debe ir vacío' },
+            { pattern: /^[0-9]+$/, message: 'Ingrese solo números' },
+          ]}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          initialValue={1}
+        >
+        <InputNumber value={quantity} onChange={handleQuantityChange} />
+        
+        <Button onClick={handleDecrement}>
+          -
+        </Button>
+        <Button onClick={handleIncrement}>
+          +
+        </Button>
+      </Form.Item>
+        
+        
         <Typography.Text style={{ display: "flex", alignItems: "center", justifyContent: "center", }}>
          Cantidad total: {quantity !== null ? quantity * 100 : ""}
         </Typography.Text>
