@@ -67,7 +67,9 @@ export default function FormOrder() {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
-        className="custom-form"      >
+        className="custom-form"   
+        layout="vertical"
+        >
         
         <div className="pb-5">
           <h2 className="text-2xl font-bold">1.Contactó</h2>
@@ -75,6 +77,7 @@ export default function FormOrder() {
         </div>  
 
         <Form.Item
+          label="Nombre Cliente"
           name="client"
           rules={[{ required: true, message: "El campo no debe ir vacio" }]}
         >
@@ -82,6 +85,7 @@ export default function FormOrder() {
         </Form.Item>
         
         <Form.Item
+          label="Telefono Cliente"
           name="client_phone"
           rules={[{ pattern: /^[0-9]+$/, message: "Ingrese solo números" },
                   {  min: 10, message: "Debe tener al menos 10 caracteres" },
@@ -97,6 +101,7 @@ export default function FormOrder() {
         </div>        
         
         <Form.Item
+          label="Nombre"
           name="name"
           rules={[{}]}
         >
@@ -104,6 +109,7 @@ export default function FormOrder() {
         </Form.Item>
 
         <Form.Item
+          label="Documento"
           name="cc"
           rules={[{}]}
         >
@@ -111,6 +117,7 @@ export default function FormOrder() {
         </Form.Item>
 
         <Form.Item
+          label="Dirección"
           name="address"
           rules={[{}]}
         >
@@ -118,6 +125,7 @@ export default function FormOrder() {
         </Form.Item>
 
         <Form.Item
+          label="Instagram"
           name="instagram"
           rules={[{}]}
         >
@@ -125,6 +133,7 @@ export default function FormOrder() {
         </Form.Item>
         
         <Form.Item
+          label="Facebook"
           name="facebook"
           rules={[{}]}
         >
@@ -132,6 +141,7 @@ export default function FormOrder() {
         </Form.Item>
 
         <Form.Item
+          label="Ciudad"
           name="city"
           rules={[{}]}
         >
@@ -149,19 +159,20 @@ export default function FormOrder() {
         { required: true, message: "El campo no debe ir vacío" },
         { pattern: /^[0-9]+$/, message: "Ingrese solo números" },
       ]}
-      style={{ display: "inline-block" }}
+      style={{ display: "flex", alignItems: "center", justifyContent: "center", }}
     >
       <InputNumber value={quantity || 1} onChange={handleQuantityChange}/>
-    </Form.Item>
-
-    <Typography.Text style={{ display: "inline-block" }}>
-      = {quantity !== null ? quantity * 100 : ""}
-    </Typography.Text>
-    <Button onClick={handleDecrement}>-</Button>
+      
+      <Button onClick={handleDecrement}>-</Button>
         <Button onClick={handleIncrement}>+</Button>
 
+        </Form.Item>
 
-        <Form.Item className="flex justify-center">
+        <Typography.Text style={{ display: "flex", alignItems: "center", justifyContent: "center", }}>
+         Cantidad total: {quantity !== null ? quantity * 100 : ""}
+        </Typography.Text>
+
+        <Form.Item className="flex justify-center pt-4">
           <Button htmlType="submit" className=" font-bold bg-red-400 text-white border-r-4 border-b-4 border-l-1 border-t-1 border-neutral-950 hover:bg-red-500!important">
             Enviar pedido
           </Button>
