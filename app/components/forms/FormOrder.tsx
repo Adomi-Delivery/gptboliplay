@@ -152,6 +152,7 @@ export default function FormOrder() {
           <p className="text-xs">Se imprimen x100 / 1=100 rotulos</p>
         </div>   
         
+        {/* cantidad y botones */}
         <Form.Item
           name="quantity"
           rules={[
