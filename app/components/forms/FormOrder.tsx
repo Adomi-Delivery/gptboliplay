@@ -76,20 +76,24 @@ export default function FormOrder() {
         </div>  
 
         <Form.Item
-          label="Nombre Cliente"
+          label="Cliente"
           name="client"
           rules={[{ required: true, message: "El campo no debe ir vacio" }]}
+          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+
         >
           <Input placeholder="Nombre y Apellido"/>
         </Form.Item>
         
         <Form.Item
-          label="Telefono Cliente"
+          label="Telefono"
           name="client_phone"
           rules={[{ pattern: /^[0-9]+$/, message: "Ingrese solo números" },
                   {  min: 10, message: "Debe tener al menos 10 caracteres" },
                   {  required: true, message: "El campo no debe ir vacio" }
                 ]}
+          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+
         >
           <Input placeholder="Celular"/>
         </Form.Item>
@@ -100,9 +104,10 @@ export default function FormOrder() {
         </div>        
         
         <Form.Item
-          label="Nombre"
+          label="Entidad"
           name="name"
           rules={[{}]}
+          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
         >
           <Input placeholder="Nombre y Apellido"/>
         </Form.Item>
@@ -111,6 +116,8 @@ export default function FormOrder() {
           label="Documento"
           name="cc"
           rules={[{}]}
+          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+
         >
           <Input placeholder="Cédula o NIT"/>
         </Form.Item>
@@ -119,6 +126,8 @@ export default function FormOrder() {
           label="Dirección"
           name="address"
           rules={[{}]}
+          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+
         >
           <Input placeholder="Dirección"/>
         </Form.Item>
@@ -127,6 +136,8 @@ export default function FormOrder() {
           label="Instagram"
           name="instagram"
           rules={[{}]}
+          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+
         >
           <Input placeholder="Instagram"/>
         </Form.Item>
@@ -135,6 +146,8 @@ export default function FormOrder() {
           label="Facebook"
           name="facebook"
           rules={[{}]}
+          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+
         >
           <Input placeholder="Facebook"/>
         </Form.Item>
@@ -143,6 +156,8 @@ export default function FormOrder() {
           label="Ciudad"
           name="city"
           rules={[{}]}
+          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+
         >
           <Input placeholder="Ciudad"/>
         </Form.Item>
@@ -159,6 +174,7 @@ export default function FormOrder() {
             { required: true, message: 'El campo no debe ir vacío' },
             { pattern: /^[0-9]+$/, message: 'Ingrese solo números' },
           ]}
+          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           initialValue={1}
         >
@@ -173,9 +189,17 @@ export default function FormOrder() {
       </Form.Item>
         
         
-        <Typography.Text style={{ display: "flex", alignItems: "center", justifyContent: "center", }}>
-         Cantidad total: {quantity !== null ? quantity * 100 : ""}
-        </Typography.Text>
+      <Typography.Text
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontWeight: "bold", // Aplicar negrita
+          fontSize: "24px",   // Aumentar el tamaño de fuente
+        }}
+      >
+        Cantidad total: {quantity !== null ? quantity * 100 : ""}
+      </Typography.Text>
 
         <Form.Item className="flex justify-center pt-4">
           <Button htmlType="submit" className=" font-bold bg-red-400 text-white border-r-4 border-b-4 border-l-1 border-t-1 border-neutral-950 hover:bg-red-500!important">
@@ -185,8 +209,8 @@ export default function FormOrder() {
         
         <div className="pt-3">
           <p className="text-sm pb-2">Nota: Los errores por mala digitación serán asumidos por el cliente</p>
-          <p className="text-sm">Cualquier duda o comentario contáctenos al whatsapp 300 123 456</p>
-        
+          <p className="text-sm">Cualquier duda o comentario contáctenos al whatsapp 310 5345494</p>
+
         </div>
       
       </Form>

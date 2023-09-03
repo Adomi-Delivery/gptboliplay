@@ -114,6 +114,10 @@ export default function FormOrder() {
       sorter: (a, b) => a.id - b.id,
     },
     {
+      title: 'Nombre del Cliente',
+      dataIndex: 'client',
+    },
+    {
       title: 'Fecha de ingreso',
       dataIndex: 'createdAT',
       sorter: (a, b) => dayjs(a.createdAT).unix() - dayjs(b.createdAT).unix(),
