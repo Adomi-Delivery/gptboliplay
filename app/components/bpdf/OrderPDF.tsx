@@ -1,7 +1,7 @@
 import { PDFViewer, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 interface DataType {
-  id: number;
+  id: string | number;
   name: string;
   cc: number;
   address: string;
@@ -13,7 +13,6 @@ interface DataType {
   instagram: string;
   client: string;
   client_phone: string;
-
 }
 
 interface OrderPDFGeneratorProps {
@@ -53,6 +52,7 @@ const styles = StyleSheet.create({
 
 
 const OrderPDFGenerator: React.FC<OrderPDFGeneratorProps> = ({ orderData }) => {
+  
   return (
       <Document>
         <Page size="A5" style={styles.page}>
