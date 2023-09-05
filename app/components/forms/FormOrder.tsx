@@ -3,8 +3,10 @@ import React, { useState } from "react";
 
 import axios from 'axios';
 import { Button, Form, Input, message, InputNumber, Typography, Row, Col  } from "antd";
+import { useRouter } from 'next/navigation'
 
 export default function FormOrder() {
+  const router = useRouter()
 
   // _____________________________________________________________________________________________________________________________
   
@@ -21,6 +23,7 @@ export default function FormOrder() {
         console.log('Success:', values);
         message.success('¡Datos enviados correctamente!');
         form.resetFields();
+        
       } else {
         console.log('Failed:', response);
         message.error('Hubo un error al enviar los datos. Por favor, inténtalo de nuevo.');
@@ -202,7 +205,7 @@ export default function FormOrder() {
       </Typography.Text>
 
         <Form.Item className="flex justify-center pt-4">
-          <Button htmlType="submit" className=" font-bold bg-red-400 text-white border-r-4 border-b-4 border-l-1 border-t-1 border-neutral-950 hover:bg-red-500!important">
+          <Button htmlType="submit"onClick={() => router.push('/redirect')} className=" font-bold bg-red-400 text-white border-r-4 border-b-4 border-l-1 border-t-1 border-neutral-950 hover:bg-red-500!important">
             Enviar pedido
           </Button>
         </Form.Item>
