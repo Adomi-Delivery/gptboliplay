@@ -57,8 +57,6 @@ export default function DashboardLayout({children}: {children: React.ReactNode})
         </Sider>
           <Content
             style={{
-              margin: '24px 16px',
-              padding: 24,
               height: '100vh',
               background: colorBgContainer,
             }}

@@ -2,6 +2,7 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation'
 
 //___________________________________________________________________________________________________________________ 
 interface DataType {
@@ -18,22 +19,9 @@ interface DataType {
     client: string;
     client_phone: string;
 }
+
 //___________________________________________________________________________________________________________________ 
-const handleButtonClick = async (order: DataType | null) => {
-  if (order !== null) {
-    try {
-      const id = order.id;
-      const status = order.status + 1;
-      const response = await axios.put(`/api/orders/${id}`, { status, id });
-    } catch (error) {
-      console.error('Error al actualizar:', error);
-    }
-  } else {
-    console.error('El objeto de pedido es nulo.');
-  }
-};
-//___________________________________________________________________________________________________________________ 
-const statusText = {
+const statusText: { [key: number]: string } = {
   0: 'Pendiente',
   1: 'En proceso',
   2: 'Impreso',
@@ -43,23 +31,59 @@ const statusText = {
 
 
 export default function GetData({ params }: { params: { id: string } }) {
+  const router = useRouter()
+
   //___________________________________________________________________________________________________________________ 
-    const [order,setOrder] = useState <DataType|null >(null)
-    
-    useEffect (()=>{
-       
+  const [order,setOrder] = useState <DataType|null >(null)
+  //___________________________________________________________________________________________________________________ 
+  const handleButtonClick = async (order: DataType | null) => {
+      if (order !== null) {
+        try {
+          const id = order.id;
+          const status = order.status + 1;
+          
+          // Actualiza el estado en el servidor
+          await axios.put(`/api/orders/${id}`, { status, id });
+          
+          // Después de actualizar el estado, obtén los datos actualizados
+          const response = await axios.get(`/api/orders/${id}`);
+          const updatedOrder = response.data.result[0];
+
+          // Actualiza el estado local con los nuevos datos
+          setOrder(updatedOrder);
+        } catch (error) {
+          console.error('Error al actualizar:', error);
+        }
+      } else {
+        console.error('El objeto de pedido es nulo.');
+      }
+  };
+  //___________________________________________________________________________________________________________________ 
+  const DeleteButton = async (order: DataType | null) => {
+    if (order !== null) {
+      try {
+        const id = order.id;      
+        await axios.delete(`/api/orders/${id}`, {data: order});
+      } catch (error) {
+        console.error('Error al actualizar:', error);
+      }
+    } else {
+      console.error('El objeto de pedido es nulo.');
+    }
+  };  
+    useEffect(() => {
       axios.get(`/api/orders/${params.id}`)
-     .then(result => {
-         const order = result.data.result[0]
-         setOrder(order)
+        .then(result => {
+          const order = result.data.result[0]
+          setOrder(order)
         })
-     .catch(error => {
-        throw error;    
-      });
-    }, [params.id])
+        .catch(error => {
+          throw error;
+        });
+    }, [params.id]);
 
     return (
-      <div id="table_order">
+      <div id="table_order" className="text-center pb-100" >
         <table>
           <thead>
             <tr>
@@ -130,7 +154,7 @@ export default function GetData({ params }: { params: { id: string } }) {
                 Estado
               </th>
               <td className="text-lg">
-                {order?.status}
+              {order ? statusText[order.status] : 'N/A'}
               </td>
             </tr>
             <tr>
@@ -151,8 +175,11 @@ export default function GetData({ params }: { params: { id: string } }) {
             </tr>
           </tbody>
         </table>
-        <div className="pt-10">
-          <button className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded pt-2">
+        <div className="pt-5">
+          <button onClick={() => {
+            DeleteButton(order);
+            router.push('/orders');
+          }} className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded pt-2">
             Delete
           </button>
           <Link href={`/orders`} passHref>
