@@ -15,7 +15,7 @@ export default function FormOrder() {
   // ___________________________________________________________________________________________________________________________
   const [orders, setOrders] = useState<DataType[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1); // Estado para controlar la página actual
-  const itemsPerPage = 5;
+  const itemsPerPage = 20;
 
   // Función para obtener los datos desde la API
   const fetchData = async () => {

@@ -5,9 +5,9 @@ import { NextResponse } from 'next/server'
 // send order
 export async function POST(request: Request) {
     const res = await request.json()
-    const {name, cc, address, city, quantity, facebook, instagram, client_phone, client} = res
+    const {name, cc, address, city, quantity, facebook, instagram, client_phone, client, phone} = res
 
-    const result = await pool.query('INSERT INTO orders SET ?',{name,cc,address,city,quantity,facebook, instagram, client_phone, client,})
+    const result = await pool.query('INSERT INTO orders SET ?',{name,cc,address,city,quantity,facebook, instagram, client_phone, client, phone,})
 
     console.log(result)
     return NextResponse.json({ res })
