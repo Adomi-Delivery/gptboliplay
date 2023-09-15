@@ -93,10 +93,7 @@ export default function FormOrder() {
         <Form.Item
           label="Telefono"
           name="client_phone"
-          rules={[{ pattern: /^[0-9]+$/, message: "Ingrese solo números" },
-                  {  min: 10, message: "Debe tener al menos 10 caracteres" },
-                  {  required: true, message: "El campo no debe ir vacio" }
-                ]}
+          rules={[{}]}
           labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
 
         >
@@ -130,7 +127,7 @@ export default function FormOrder() {
         <Form.Item
           label="Telefeno"
           name="phone"
-          rules={[{ pattern: /^[0-9]+$/, message: "Ingrese solo números"}]}
+          rules={[{}]}
           labelCol={{ span: 6, style: { fontWeight: 'bold'} }}
 
         >
@@ -193,39 +190,39 @@ export default function FormOrder() {
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           initialValue={1}
         >
-        <InputNumber value={quantity} onChange={handleQuantityChange} />
+          <InputNumber value={quantity} onChange={handleQuantityChange} />
+          
+          <Button onClick={handleDecrement} className="m-2">
+            -
+          </Button>
+          <Button onClick={handleIncrement} className="">
+            +
+          </Button>
+        </Form.Item>
         
-        <Button onClick={handleDecrement} className="m-2">
-          -
-        </Button>
-        <Button onClick={handleIncrement} className="">
-          +
-        </Button>
-      </Form.Item>
         
-        
-      <Typography.Text
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontWeight: "bold", // Aplicar negrita
-          fontSize: "24px",   // Aumentar el tamaño de fuente
-        }}
-      >
-        Cantidad total: {quantity !== null ? quantity * 100 : ""}
-      </Typography.Text>
-      <Typography.Text
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontWeight: "bold",
-          fontSize: "24px",
-        }}
-      >
-        Precio: {quantity !== null ? `$${(quantity * 6000).toLocaleString()}` : ""}
-      </Typography.Text>
+        <Typography.Text
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: "bold", // Aplicar negrita
+            fontSize: "24px",   // Aumentar el tamaño de fuente
+          }}
+        >
+          Cantidad total: {quantity !== null ? quantity * 100 : ""}
+        </Typography.Text>
+        <Typography.Text
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: "bold",
+            fontSize: "24px",
+          }}
+        >
+          Precio: {quantity !== null ? `$${(quantity * 6000).toLocaleString()}` : ""}
+        </Typography.Text>
 
         <Form.Item className="flex justify-center pt-4">
           <Button htmlType="submit" className=" font-bold bg-red-400 text-white border-r-4 border-b-4 border-l-1 border-t-1 border-neutral-950 hover:bg-red-500!important">
