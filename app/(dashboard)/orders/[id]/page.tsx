@@ -1,9 +1,10 @@
 'use client'
 import axios from "axios";
-import {useEffect, useState} from "react";
 import Link from 'next/link';
+import OrderPDFGenerator from '@/app/components/bpdf/OrderPDF';
+import {useEffect, useState} from "react";
 import { useRouter } from 'next/navigation'
-
+import { PDFDownloadLink} from '@react-pdf/renderer';
 //___________________________________________________________________________________________________________________ 
 interface DataType {
     id: string | number;
@@ -84,6 +85,7 @@ export default function GetData({ params }: { params: { id: string } }) {
     }, [params.id]);
 
     return (
+      <main>
       <div id="table_order" className="text-center pb-100" >
         <table>
           <thead>
@@ -185,20 +187,37 @@ export default function GetData({ params }: { params: { id: string } }) {
           </tbody>
         </table>
         <div className="pt-5">
+          
           <button onClick={() => {
             DeleteButton(order);
             router.push('/orders');
           }} className=" bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded pt-2">
             Delete
           </button>
+
           <Link href={`/orders`} passHref>
             <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded m-1">Regresar</button>
           </Link>
           
-            <button onClick={() => handleButtonClick(order)} className="mr-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Estado</button>
+          <button onClick={() => handleButtonClick(order)} className="mr-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pr-5">Estado</button>
           
+          <PDFDownloadLink
+            document={<OrderPDFGenerator orderData={order} />} 
+            fileName={`order_${order?.id}.pdf`}
+            className="mr-1 bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded"
+          >
+            {({ blob, url, loading, error }) =>
+              {
+                return (
+                  loading ? 'Loading document...' : 'PDF'
+                )
+              }
+            }
+          </PDFDownloadLink>
+
         </div>
       </div>
+      </main>
     );
     
     

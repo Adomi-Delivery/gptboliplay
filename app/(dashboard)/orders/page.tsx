@@ -141,18 +141,19 @@ export default function FormOrder() {
         <>
           {record.status !== 3 ? (
             <>
-              <Button onClick={() => handleButtonClick(record)} className="mr-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Estado</Button>
+              <Button onClick={() => handleButtonClick(record)} className="mr-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Estado</Button>
             </>
           ) : (
-            <span className="mr-2 bg-green-800  text-white font-bold py-2 px-4 rounded">Finalizado</span>
-          )}{' '} {/* Espacio entre los botones */}
+            <span className="mr-1 bg-green-800  text-white font-bold py-2 px-4 rounded">Finalizado</span>
+          )}
+          
           <Button onClick={() => DeleteButton(record)} className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Borrar</Button>
           
           
           <PDFDownloadLink
             document={<OrderPDFGenerator orderData={record} />} 
             fileName={`order_${record.id}.pdf`}
-            className="mr-2 bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded"
+            className="mr-1 bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded"
           >
             {({ blob, url, loading, error }) =>
               {
@@ -164,7 +165,7 @@ export default function FormOrder() {
           </PDFDownloadLink>
 
           <Link href={`/orders/${record.id}`} passHref>
-            <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Ver Detalles</button>
+            <button className="mr-1 bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Ver Detalles</button>
           </Link>
 
         </>
