@@ -23,7 +23,9 @@ export default function FormOrder() {
         console.log('Success:', values);
         message.success('¡Datos enviados correctamente!');
         form.resetFields();
-        
+
+        router.push('/redirect')
+
       } else {
         console.log('Failed:', response);
         message.error('Hubo un error al enviar los datos. Por favor, inténtalo de nuevo.');
@@ -107,29 +109,39 @@ export default function FormOrder() {
         </div>        
         
         <Form.Item
-          label="Entidad"
+          label="Empresa / Remitente"
           name="name"
           rules={[{}]}
-          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+          labelCol={{ span: 20, style: { fontWeight: 'bold' } }}
         >
-          <Input placeholder="Nombre y Apellido"/>
+          <Input placeholder="Empresa / Remitente"/>
         </Form.Item>
 
         <Form.Item
           label="Documento"
           name="cc"
           rules={[{}]}
-          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+          labelCol={{ span: 6, style: { fontWeight: 'bold'} }}
 
         >
           <Input placeholder="Cédula o NIT"/>
         </Form.Item>
 
         <Form.Item
+          label="Telefeno"
+          name="phone"
+          rules={[{ pattern: /^[0-9]+$/, message: "Ingrese solo números"}]}
+          labelCol={{ span: 6, style: { fontWeight: 'bold'} }}
+
+        >
+          <Input placeholder="Telefono"/>
+        </Form.Item>
+
+        <Form.Item
           label="Dirección"
           name="address"
           rules={[{}]}
-          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+          labelCol={{ span: 6, style: { fontWeight: 'bold'} }}
 
         >
           <Input placeholder="Dirección"/>
@@ -139,7 +151,7 @@ export default function FormOrder() {
           label="Instagram"
           name="instagram"
           rules={[{}]}
-          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+          labelCol={{ span: 6, style: { fontWeight: 'bold'} }}
 
         >
           <Input placeholder="Instagram"/>
@@ -149,7 +161,7 @@ export default function FormOrder() {
           label="Facebook"
           name="facebook"
           rules={[{}]}
-          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+          labelCol={{ span: 6, style: { fontWeight: 'bold'} }}
 
         >
           <Input placeholder="Facebook"/>
@@ -159,7 +171,7 @@ export default function FormOrder() {
           label="Ciudad"
           name="city"
           rules={[{}]}
-          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+          labelCol={{ span: 6, style: { fontWeight: 'bold'} }}
 
         >
           <Input placeholder="Ciudad"/>
@@ -177,16 +189,16 @@ export default function FormOrder() {
             { required: true, message: 'El campo no debe ir vacío' },
             { pattern: /^[0-9]+$/, message: 'Ingrese solo números' },
           ]}
-          labelCol={{ span: 6, style: { fontWeight: 'bold', color: 'blue' } }}
+          labelCol={{ span: 6, style: { fontWeight: 'bold'} }}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           initialValue={1}
         >
         <InputNumber value={quantity} onChange={handleQuantityChange} />
         
-        <Button onClick={handleDecrement}>
+        <Button onClick={handleDecrement} className="m-2">
           -
         </Button>
-        <Button onClick={handleIncrement}>
+        <Button onClick={handleIncrement} className="">
           +
         </Button>
       </Form.Item>
@@ -203,16 +215,27 @@ export default function FormOrder() {
       >
         Cantidad total: {quantity !== null ? quantity * 100 : ""}
       </Typography.Text>
+      <Typography.Text
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontWeight: "bold",
+          fontSize: "24px",
+        }}
+      >
+        Precio: {quantity !== null ? `$${(quantity * 6000).toLocaleString()}` : ""}
+      </Typography.Text>
 
         <Form.Item className="flex justify-center pt-4">
-          <Button htmlType="submit"onClick={() => router.push('/redirect')} className=" font-bold bg-red-400 text-white border-r-4 border-b-4 border-l-1 border-t-1 border-neutral-950 hover:bg-red-500!important">
+          <Button htmlType="submit" className=" font-bold bg-red-400 text-white border-r-4 border-b-4 border-l-1 border-t-1 border-neutral-950 hover:bg-red-500!important">
             Enviar pedido
           </Button>
         </Form.Item>
         
         <div className="pt-3">
           <p className="text-sm pb-2">Nota: Los errores por mala digitación serán asumidos por el cliente</p>
-          <p className="text-sm">Cualquier duda o comentario contáctenos al whatsapp 310 5345494</p>
+          <p className="text-sm">Cualquier duda o comentario contáctenos al whatsapp 310 849 8152</p>
 
         </div>
       

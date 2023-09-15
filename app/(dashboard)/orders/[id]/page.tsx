@@ -10,6 +10,7 @@ interface DataType {
     id: string | number;
     name: string;
     cc: number;
+    phone:number;
     address: string;
     quantity: number;
     status: number;
@@ -113,6 +114,14 @@ export default function GetData({ params }: { params: { id: string } }) {
             </tr>
             <tr>
               <th className="font-bold text-xl">
+                Telefono
+              </th>
+              <td className="text-lg">
+                {order?.phone}
+              </td>
+            </tr>
+            <tr>
+              <th className="font-bold text-xl">
                 Facebook
               </th>
               <td className="text-lg">
@@ -182,12 +191,12 @@ export default function GetData({ params }: { params: { id: string } }) {
           <button onClick={() => {
             DeleteButton(order);
             router.push('/orders');
-          }} className="mr-1 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded pt-2">
+          }} className=" bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded pt-2">
             Delete
           </button>
 
           <Link href={`/orders`} passHref>
-            <button className=" mr-1 bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Regresar</button>
+            <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded m-1">Regresar</button>
           </Link>
           
           <button onClick={() => handleButtonClick(order)} className="mr-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pr-5">Estado</button>
