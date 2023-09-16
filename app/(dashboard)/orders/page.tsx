@@ -41,6 +41,7 @@ export default function FormOrder() {
     id: number;
     name: string;
     cc: number;
+    phone: number;
     address: string;
     quantity: number;
     status: number;
