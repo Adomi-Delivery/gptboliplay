@@ -43,24 +43,22 @@ export default function FormOrder() {
 
   const [quantity, setQuantity] = useState<number | null>(1);
 
-  const handleQuantityChange = (value: number | null) => {
-    setQuantity(value);
-  };
   const handleIncrement = () => {
-    if (quantity !== null) {
-      setQuantity(quantity + 1);
-    } else {
-      setQuantity(2); // Si quantity es null, incrementar desde 1 sería 2
-    }
+    let value = form.getFieldValue('quantity')
+    form.setFieldValue('quantity',++value)
+    setQuantity(value);
+
   };
 
   const handleDecrement = () => {
-    if (quantity !== null && quantity > 1) {
-      setQuantity(quantity - 1);
-    } else {
-      setQuantity(1); // Si quantity es null o es 1, decrementar sería 1
+    let value = form.getFieldValue('quantity');
+    
+    if (value > 1) {
+      form.setFieldValue('quantity', --value);
+      setQuantity(value);
     }
   };
+  
   
   // _____________________________________________________________________________________________________________________________
   return (
@@ -73,6 +71,7 @@ export default function FormOrder() {
         autoComplete="off"
         className="custom-form"   
         layout="vertical"
+        initialValues={{quantity:1}}
         >
         
         <div className="pb-5">
@@ -188,18 +187,20 @@ export default function FormOrder() {
           ]}
           labelCol={{ span: 6, style: { fontWeight: 'bold'} }}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          initialValue={1}
         >
-          <InputNumber value={quantity} onChange={handleQuantityChange} />
+          <InputNumber/>
           
+          
+        </Form.Item>
+        
+        <div           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Button onClick={handleDecrement} className="m-2">
             -
           </Button>
           <Button onClick={handleIncrement} className="">
             +
           </Button>
-        </Form.Item>
-        
+          </div>
         
         <Typography.Text
           style={{

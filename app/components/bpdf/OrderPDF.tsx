@@ -4,6 +4,7 @@ interface DataType {
   id: string | number;
   name: string;
   cc: number;
+  phone: number;
   address: string;
   quantity: number;
   status: number;
@@ -70,6 +71,10 @@ const OrderPDFGenerator: React.FC<OrderPDFGeneratorProps> = ({ orderData }) => {
               <Text style={styles.dataColumn}>{orderData?.cc}</Text>
             </View>
             <View style={styles.container}>
+              <Text style={styles.labelColumn}>Telefono:</Text>
+              <Text style={styles.dataColumn}>{orderData?.phone}</Text>
+            </View>
+            <View style={styles.container}>
               <Text style={styles.labelColumn}>Dirección:</Text>
               <Text style={styles.dataColumn}>{orderData?.address}</Text>
             </View>
@@ -88,8 +93,23 @@ const OrderPDFGenerator: React.FC<OrderPDFGeneratorProps> = ({ orderData }) => {
             </View>
             <View style={styles.container}>
               <Text style={styles.labelColumn}>Cantidad:</Text>
-              <Text style={styles.dataColumn}>{orderData?.quantity}</Text>
+              <Text style={styles.dataColumn}>
+                {orderData?.quantity !== undefined ? orderData.quantity * 100 : "N/A"}
+              </Text>
             </View>
+            <View style={styles.container}>
+              <Text style={styles.labelColumn}>Precio</Text>
+              <Text style={styles.dataColumn}>
+                {orderData?.quantity !== undefined
+                  ? (orderData.quantity * 6000).toLocaleString('es-ES', {
+                      style: 'currency',
+                      currency: 'CLP', // Puedes ajustar la moneda según tus necesidades
+                    })
+                  : "N/A"
+                }
+              </Text>
+            </View>
+
           </View>
         </Page>
       </Document>
