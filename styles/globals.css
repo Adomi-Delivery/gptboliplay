@@ -26,3 +26,30 @@
     border: 1px solid black;
     padding: 8px;
   }
+
+  /* En tu archivo CSS de BoliplayForm */
+.bg-background-image {
+  background-image: url('/images/backgroundesktop.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* Otras propiedades de estilo que desees */
+}
+/* Agrega estos estilos a tu archivo CSS o directamente en línea en tu componente React */
+#chatContainer {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#messageInput {
+  width: 100%;
+  margin-top: 10px;
+}
+
+#btnSend {
+  float: right;
+}
+

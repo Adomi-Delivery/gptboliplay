@@ -40,17 +40,17 @@ export default function DashboardLayout({children}: {children: React.ReactNode})
               {
                 key: '1',
                 icon: <UserOutlined />,
-                label: 'nav 1',
+                label: 'Boliplay',
               },
               {
                 key: '2',
-                icon: <VideoCameraOutlined />,
-                label: 'nav 2',
+                icon: <UserOutlined />,
+                label: 'Hondubet',
               },
               {
                 key: '3',
-                icon: <UploadOutlined />,
-                label: 'nav 3',
+                icon: <UserOutlined />,
+                label: 'Sivarbet',
               },
             ]}
           />

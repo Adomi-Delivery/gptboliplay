@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button, Pagination  } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import axios from 'axios';
-import OrderPDFGenerator from '@/app/components/bpdf/OrderPDF';
-import { PDFDownloadLink} from '@react-pdf/renderer';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 
@@ -109,12 +107,12 @@ export default function FormOrder() {
   // Columns
   const columns: ColumnsType<DataType> = [
     {
-      title: 'Número de Orden',
+      title: 'Número de cliente',
       dataIndex: 'id',
       sorter: (a, b) => a.id - b.id,
     },
     {
-      title: 'Nombre del Cliente',
+      title: 'número del Cliente',
       dataIndex: 'client',
     },
     {
@@ -124,7 +122,7 @@ export default function FormOrder() {
       render: (createdAT) => dayjs(createdAT).format('YYYY-MM-DD'),
     },
     {
-      title: 'Cantidad',
+      title: 'Campaña',
       dataIndex: 'quantity',
       sorter: (a, b) => a.quantity - b.quantity,
       render: (quantity) => <span>{quantity * 100}</span>,
@@ -147,21 +145,6 @@ export default function FormOrder() {
             <span className="mr-2 bg-green-800  text-white font-bold py-2 px-4 rounded">Finalizado</span>
           )}{' '} {/* Espacio entre los botones */}
           <Button onClick={() => DeleteButton(record)} className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Borrar</Button>
-          
-          
-          <PDFDownloadLink
-            document={<OrderPDFGenerator orderData={record} />} 
-            fileName={`order_${record.id}.pdf`}
-            className="mr-2 bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded"
-          >
-            {({ blob, url, loading, error }) =>
-              {
-                return (
-                  loading ? 'Loading document...' : 'PDF'
-                )
-              }
-            }
-          </PDFDownloadLink>
 
           <Link href={`/orders/${record.id}`} passHref>
             <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Ver Detalles</button>
