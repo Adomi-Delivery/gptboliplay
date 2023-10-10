@@ -19,6 +19,7 @@ export default function DashboardLayout({children}: {children: React.ReactNode})
 
     return (
       <Layout>
+<<<<<<< HEAD
         
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="demo-logo-vertical" />
@@ -55,10 +56,10 @@ export default function DashboardLayout({children}: {children: React.ReactNode})
             ]}
           />
         </Sider>
+=======
+>>>>>>> 583ce682f6cd24540a0d8d874e33166ba56a22c6
           <Content
             style={{
-              margin: '24px 16px',
-              padding: 24,
               height: '100vh',
               background: colorBgContainer,
             }}

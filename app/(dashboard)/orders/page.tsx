@@ -13,7 +13,7 @@ export default function FormOrder() {
   // ___________________________________________________________________________________________________________________________
   const [orders, setOrders] = useState<DataType[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1); // Estado para controlar la página actual
-  const itemsPerPage = 5;
+  const itemsPerPage = 20;
 
   // Función para obtener los datos desde la API
   const fetchData = async () => {
@@ -39,6 +39,7 @@ export default function FormOrder() {
     id: number;
     name: string;
     cc: number;
+    phone: number;
     address: string;
     quantity: number;
     status: number;
@@ -139,15 +140,34 @@ export default function FormOrder() {
         <>
           {record.status !== 3 ? (
             <>
-              <Button onClick={() => handleButtonClick(record)} className="mr-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Estado</Button>
+              <Button onClick={() => handleButtonClick(record)} className="mr-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Estado</Button>
             </>
           ) : (
-            <span className="mr-2 bg-green-800  text-white font-bold py-2 px-4 rounded">Finalizado</span>
-          )}{' '} {/* Espacio entre los botones */}
+            <span className="mr-1 bg-green-800  text-white font-bold py-2 px-4 rounded">Finalizado</span>
+          )}
+          
           <Button onClick={() => DeleteButton(record)} className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Borrar</Button>
+<<<<<<< HEAD
+=======
+          
+          
+          <PDFDownloadLink
+            document={<OrderPDFGenerator orderData={record} />} 
+            fileName={`order_${record.id}.pdf`}
+            className="mr-1 bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded"
+          >
+            {({ blob, url, loading, error }) =>
+              {
+                return (
+                  loading ? 'Loading document...' : 'PDF'
+                )
+              }
+            }
+          </PDFDownloadLink>
+>>>>>>> 583ce682f6cd24540a0d8d874e33166ba56a22c6
 
           <Link href={`/orders/${record.id}`} passHref>
-            <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Ver Detalles</button>
+            <button className="mr-1 bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Ver Detalles</button>
           </Link>
 
         </>
