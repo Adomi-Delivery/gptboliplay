@@ -147,25 +147,6 @@ export default function FormOrder() {
           )}
           
           <Button onClick={() => DeleteButton(record)} className="mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Borrar</Button>
-<<<<<<< HEAD
-=======
-          
-          
-          <PDFDownloadLink
-            document={<OrderPDFGenerator orderData={record} />} 
-            fileName={`order_${record.id}.pdf`}
-            className="mr-1 bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded"
-          >
-            {({ blob, url, loading, error }) =>
-              {
-                return (
-                  loading ? 'Loading document...' : 'PDF'
-                )
-              }
-            }
-          </PDFDownloadLink>
->>>>>>> 583ce682f6cd24540a0d8d874e33166ba56a22c6
-
           <Link href={`/orders/${record.id}`} passHref>
             <button className="mr-1 bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Ver Detalles</button>
           </Link>
