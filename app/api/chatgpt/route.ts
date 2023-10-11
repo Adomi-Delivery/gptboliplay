@@ -6,6 +6,7 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
+//un cambio
 // Función para generar una solicitud de chat
 export async function POST (request:Request) {
     const { petition } = await request.json();
